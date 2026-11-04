@@ -1,6 +1,6 @@
 import { randomBytes, scryptSync, timingSafeEqual, createHash } from 'node:crypto';
 import type { Request, Response, NextFunction } from 'express';
-import { db } from './db';
+import { db } from './db.js';
 
 export function hashPassword(password: string) {
   const salt = randomBytes(16).toString('hex');

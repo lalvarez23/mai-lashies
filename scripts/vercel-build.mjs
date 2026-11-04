@@ -14,5 +14,6 @@ const run = (args) => {
 };
 run(['node_modules/prisma/build/index.js', 'generate']);
 run(['node_modules/typescript/bin/tsc', '--noEmit']);
+run(['node_modules/typescript/bin/tsc', '--project', 'tsconfig.server.json']);
 run(['node_modules/vite/bin/vite.js', 'build']);
 // Las migraciones se aplican de forma explícita antes de promover una nueva versión.

@@ -5,11 +5,11 @@ import rateLimit from 'express-rate-limit';
 import { randomBytes } from 'node:crypto';
 import { z } from 'zod';
 import { Decimal } from 'decimal.js';
-import { db } from './db';
-import { Prisma } from './generated/prisma/client';
-import { session, admin, digest, safeUser, hashPassword, verifyPassword } from './security';
-import { allowedOrigins } from './origins';
-import { LoginStore } from './login-store';
+import { db } from './db.js';
+import { Prisma } from './generated/prisma/client.js';
+import { session, admin, digest, safeUser, hashPassword, verifyPassword } from './security.js';
+import { allowedOrigins } from './origins.js';
+import { LoginStore } from './login-store.js';
 
 const app = express();
 app.disable('x-powered-by');

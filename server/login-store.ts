@@ -1,6 +1,6 @@
 import type { Store, Options, ClientRateLimitInfo } from 'express-rate-limit';
-import { db } from './db';
-import { digest } from './security';
+import { db } from './db.js';
+import { digest } from './security.js';
 
 /** Límite compartido por todas las instancias; no almacena direcciones IP en claro. */
 export class LoginStore implements Store {

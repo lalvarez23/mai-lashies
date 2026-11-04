@@ -22,7 +22,7 @@ Importar `lalvarez23/mai-lashies` desde GitHub y usar la raíz del repositorio.
 | Build Command | npm run build:vercel |
 | Output Directory | dist |
 
-La compilación genera el cliente Prisma, verifica TypeScript y construye React. Las migraciones no se aplican durante una compilación de vista previa. Los despliegues de vista previa están desactivados inicialmente para no usar datos reales en entornos de prueba.
+La compilación genera el cliente Prisma, verifica TypeScript, comprueba la emisión del backend como módulos ESM de Node.js con `tsconfig.server.json` y construye React. Los imports relativos del backend y del cliente generado usan extensiones `.js`, necesarias al ejecutarse fuera de tsx. Las migraciones no se aplican durante una compilación de vista previa. Los despliegues de vista previa están desactivados inicialmente para no usar datos reales en entornos de prueba.
 
 ## Variables de entorno
 

@@ -1,5 +1,5 @@
-import { db } from './db';
-import { hashPassword } from './security';
+import { db } from './db.js';
+import { hashPassword } from './security.js';
 const email = process.env.ADMIN_EMAIL;
 const password = process.env.ADMIN_PASSWORD;
 if (!email || !password || password.length < 12 || password.startsWith('CAMBIAR'))

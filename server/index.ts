@@ -1,5 +1,5 @@
-import { app } from './app';
-import { db } from './db';
+import { app } from './app.js';
+import { db } from './db.js';
 const port = Number(process.env.PORT ?? 3001);
 await db.$connect();
 const server = app.listen(port, '127.0.0.1', () =>
