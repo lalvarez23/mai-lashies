@@ -10,3 +10,4 @@ server/generated/
 *.log
 # Capturas locales que pueden incluir cifras y datos privados del negocio.
 docs/capturas/
+.vercel/

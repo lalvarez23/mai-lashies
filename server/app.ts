@@ -8,9 +8,13 @@ import { Decimal } from 'decimal.js';
 import { db } from './db';
 import { Prisma } from './generated/prisma/client';
 import { session, admin, digest, safeUser, hashPassword, verifyPassword } from './security';
+import { allowedOrigins } from './origins';
+import { LoginStore } from './login-store';
 
 const app = express();
 app.disable('x-powered-by');
+// Vercel termina TLS y normaliza el proxy que entrega la solicitud a la función.
+if (process.env.VERCEL) app.set('trust proxy', 1);
 app.use(helmet());
 app.use(express.json({ limit: '256kb' }));
 app.use('/api', (_req, res, next) => {
@@ -19,8 +23,8 @@ app.use('/api', (_req, res, next) => {
 });
 app.use('/api', (req, res, next) => {
   const origin = req.headers.origin;
-  const allowed = (process.env.APP_ORIGIN ?? 'http://127.0.0.1:5173').split(',');
-  if (origin && !allowed.includes(origin))
+  const allowed = allowedOrigins();
+  if (origin && !allowed.has(origin))
     return res.status(403).json({ error: 'Origen no autorizado.' });
   next();
 });
@@ -71,6 +75,7 @@ async function audit(
   await tx.audit.create({ data: { userId, action, entity, entityId, detail } });
 }
 const loginLimit = rateLimit({
+  store: new LoginStore(),
   windowMs: 15 * 60 * 1000,
   limit: 30,
   standardHeaders: 'draft-8',
@@ -848,13 +853,9 @@ app.use('/api', (_req, res) => res.status(404).json({ error: 'Ruta no encontrada
 app.use(
   (error: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
     if (error instanceof z.ZodError)
-      return res
-        .status(400)
-        .json({
-          error: error.issues
-            .map((issue) => `${issue.path.join('.')}: ${issue.message}`)
-            .join(' · '),
-        });
+      return res.status(400).json({
+        error: error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join(' · '),
+      });
     if (error instanceof Problem) return res.status(error.status).json({ error: error.message });
     const code = (error as { code?: string }).code;
     if (code === 'P2002')
@@ -867,11 +868,9 @@ app.use(
     if (error instanceof SyntaxError)
       return res.status(400).json({ error: 'El formato de la solicitud no es válido.' });
     console.error('Error del servidor:', error instanceof Error ? error.message : 'desconocido');
-    res
-      .status(500)
-      .json({
-        error: 'No se pudo completar la operación. Revisa el servidor e inténtalo de nuevo.',
-      });
+    res.status(500).json({
+      error: 'No se pudo completar la operación. Revisa el servidor e inténtalo de nuevo.',
+    });
   },
 );
 export { app };

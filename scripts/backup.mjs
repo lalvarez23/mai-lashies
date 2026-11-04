@@ -19,6 +19,7 @@ export async function createBackup(connectionString, output) {
   await client.connect();
   try {
     await client.query('BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY');
+    await client.query("SET LOCAL TIME ZONE 'UTC'");
     const data = {};
     // PostgreSQL produce JSON directamente para conservar la precisión de NUMERIC.
     for (const table of tables) {

@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=24.0.0"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "node scripts/dev.mjs",
@@ -15,13 +15,18 @@
     "db:generate": "prisma generate",
     "setup": "node scripts/setup.mjs",
     "build": "tsc --noEmit && vite build",
+    "build:vercel": "node scripts/vercel-build.mjs",
+    "db:cloud:prepare": "node scripts/cloud-database.mjs",
+    "db:cloud:import": "node scripts/migrate-to-cloud.mjs",
     "test": "node scripts/test.mjs",
     "backup": "node scripts/backup.mjs",
+    "backup:cloud": "node scripts/cloud-backup.mjs",
     "restore": "node scripts/restore.mjs"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.10.1",
     "@prisma/client": "7.10.1",
+    "@vercel/functions": "^3.10.6",
     "decimal.js": "^10.6.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",

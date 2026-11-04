@@ -25,7 +25,7 @@ Primera versión funcional local. El alcance inicial acordado se construyó como
 
 ## Pendiente
 
-Fotografías de productos, importación de inventario, devoluciones parciales, lotes y vencimientos, cierre de caja y publicación. Las funciones condicionales de lotes y cierre requieren definir primero las reglas del negocio.
+Fotografías de productos, importación de inventario, devoluciones parciales, lotes y vencimientos y cierre de caja. Las funciones condicionales de lotes y cierre requieren definir primero las reglas del negocio.
 
 Consulta README.md para iniciar, ingresar, respaldar y restaurar. Esta entrega es una primera versión local para revisión antes de cargar y operar datos reales.
 
@@ -46,3 +46,12 @@ Consulta README.md para iniciar, ingresar, respaldar y restaurar. Esta entrega e
 - Paleta rosa chicle, fucsia y fondos suaves con reflejos perlados; tipografía oscura en formularios y cifras.
 - Compilación verificada y revisión en navegador del login y dashboard con acceso real.
 - Capturas: `capturas/login-marca.png` y `capturas/dashboard-marca.png`.
+
+## Adaptación a Vercel
+
+- React estático y Express como función bajo `/api`, con Node.js 24.
+- Conexiones agrupadas a PostgreSQL, cookies HTTPS y validación de orígenes de producción.
+- Límite de ingreso persistente entre instancias.
+- Migración de datos con respaldo, comprobación de base vacía y verificación completa antes del commit de datos.
+- Quince pruebas de integración y configuración aprobadas; el conjunto incluye importación y rechazo de duplicados en una base aislada.
+- Instrucciones de despliegue y mantenimiento en `DESPLIEGUE_VERCEL.md`.

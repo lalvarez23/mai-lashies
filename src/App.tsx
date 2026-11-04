@@ -27,6 +27,7 @@ const SettingsPage = lazy(() =>
   import('./Settings').then((module) => ({ default: module.SettingsPage })),
 );
 export type Changed = (message: string) => void;
+const hosted = import.meta.env.VITE_APP_HOSTED === 'true';
 type Page = 'home' | 'products' | 'sales' | 'deliveries' | 'expenses' | 'reports' | 'settings';
 const pages = [
   {
@@ -156,13 +157,25 @@ function Login({ onLogin }: { onLogin: (user: User) => void }) {
             <Save busy={busy} label="Ingresar a mi negocio" />
           </form>
           <div className="login-help">
-            ¿Primer ingreso? Encuentra tu cuenta inicial en el archivo{' '}
-            <strong>.local/ACCESO.txt</strong> del proyecto. Si olvidaste tu clave, solicita un
-            restablecimiento al superadministrador.
+            {hosted ? (
+              <>
+                Si necesitas una cuenta o restablecer tu contraseña, comunícate con la persona que
+                administra Mai Lashies.
+              </>
+            ) : (
+              <>
+                ¿Primer ingreso? Encuentra tu cuenta inicial en el archivo{' '}
+                <strong>.local/ACCESO.txt</strong> del proyecto. Si olvidaste tu clave, solicita un
+                restablecimiento al superadministrador.
+              </>
+            )}
           </div>
         </div>
         <small className="local-note">
-          <span /> Entorno local · Acceso solo para el equipo
+          <span />{' '}
+          {hosted
+            ? 'Acceso privado · Solo para el equipo'
+            : 'Entorno local · Acceso solo para el equipo'}
         </small>
       </section>
     </div>
@@ -309,7 +322,7 @@ export default function App() {
           </div>
           <div className="topbar-right">
             <span className="local-pill">
-              <i /> Local
+              <i /> {hosted ? 'En línea' : 'Local'}
             </span>
             <span className="currency-label">COP · Colombia</span>
           </div>

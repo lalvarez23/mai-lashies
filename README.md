@@ -2,6 +2,8 @@
 
 Aplicación local de administración interna, en español y COP, para un equipo de dos a cinco personas. React + TypeScript + Vite en la interfaz, Node.js + Express en la API y PostgreSQL con Prisma para persistencia.
 
+El proyecto también está adaptado para Vercel con PostgreSQL en Neon. Consulta [Despliegue en Vercel](docs/DESPLIEGUE_VERCEL.md) para las variables de producción, la migración de datos y los respaldos. El entorno local continúa disponible para desarrollo.
+
 ## Iniciar
 
 Requisito: Node.js 24 LTS y npm. La instalación de dependencias requiere internet. Después, la aplicación funciona localmente sin cargar fuentes, imágenes ni servicios externos. No requiere Docker para el entorno incluido en Windows x64.
@@ -109,6 +111,6 @@ Las migraciones se encuentran en `prisma/migrations`. Después de actualizar el 
 - Devoluciones parciales: esta entrega permite anulación/reembolso total.
 - Apertura y cierre de caja, aportes y retiros, si se confirma esa necesidad.
 - Filtros avanzados, paginación de históricos y exportaciones detalladas de ventas.
-- Alojamiento, acceso remoto y operación multiusuario desde varios dispositivos.
+- Ampliaciones de infraestructura y ajustes de operación según el uso real.
 
 No incluye tienda pública, crédito, facturación electrónica ni contabilidad fiscal formal.

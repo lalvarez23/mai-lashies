@@ -7,6 +7,7 @@ import { mkdir } from 'node:fs/promises';
 import pg from 'pg';
 import { createBackup } from '../scripts/backup.mjs';
 import { restoreBackup } from '../scripts/restore.mjs';
+import { importSnapshot } from '../scripts/import-snapshot.mjs';
 
 const originalUrl = process.env.DATABASE_URL!;
 const testName = `mai_lashies_test_${randomUUID().replaceAll('-', '')}`;
@@ -26,6 +27,7 @@ assert.equal(migration.status, 0, migration.stderr);
 const { db } = await import('../server/db');
 const { app } = await import('../server/app');
 const { hashPassword } = await import('../server/security');
+const { LoginStore } = await import('../server/login-store');
 const server = app.listen(0, '127.0.0.1');
 await new Promise<void>((resolve) => server.once('listening', resolve));
 const port = (server.address() as { port: number }).port;
@@ -446,5 +448,58 @@ test('Respaldo y restauración preservan existencias, valores y auditoría en ot
     assert.deepEqual(inventory.rows, source);
   } finally {
     await restored.end();
+  }
+});
+
+test('El límite de ingreso se comparte entre instancias y cuenta incrementos simultáneos', async () => {
+  const first = new LoginStore(),
+    second = new LoginStore();
+  const key = 'deployment-test-' + randomUUID();
+  const hits = await Promise.all(
+    Array.from({ length: 31 }, (_, i) => (i % 2 ? first : second).increment(key)),
+  );
+  assert.deepEqual(
+    hits.map((hit) => hit.totalHits).sort((a, b) => a - b),
+    Array.from({ length: 31 }, (_, i) => i + 1),
+  );
+  assert.ok(hits.every((hit) => hit.resetTime instanceof Date));
+  await first.resetKey(key);
+  assert.equal((await second.increment(key)).totalHits, 1);
+});
+
+test('La entrada de Vercel reutiliza Express sin abrir otro servidor', async () => {
+  const entry = await import('../api/index');
+  assert.equal(entry.default, app);
+});
+
+test('La migración de nube conserva cada registro y rechaza importar sobre datos existentes', async () => {
+  const destination = testName + '_import';
+  const url = new URL(originalUrl);
+  url.pathname = '/' + destination;
+  await root.query(`CREATE DATABASE "${destination}"`);
+  try {
+    const migration = spawnSync(
+      process.execPath,
+      ['node_modules/prisma/build/index.js', 'migrate', 'deploy'],
+      { env: { ...process.env, DATABASE_URL: url.toString() }, encoding: 'utf8' },
+    );
+    assert.equal(migration.status, 0, migration.stderr);
+    const output = `.local/test-backups/${testName}-migration.json`;
+    const counts = await createBackup(testUrl.toString(), output);
+    assert.deepEqual(await importSnapshot(url.toString(), output), counts);
+    await assert.rejects(() => importSnapshot(url.toString(), output), /ya contiene registros/);
+    const target = new pg.Client({ connectionString: url.toString() });
+    await target.connect();
+    try {
+      assert.equal(
+        (await target.query('SELECT count(*)::int AS count FROM "Sale"')).rows[0].count,
+        counts.Sale,
+      );
+    } finally {
+      await target.end();
+    }
+  } finally {
+    assert.match(destination, /^mai_lashies_test_[a-z0-9_]+$/);
+    await root.query(`DROP DATABASE "${destination}" WITH (FORCE)`);
   }
 });

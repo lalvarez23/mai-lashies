@@ -10,6 +10,7 @@ try {
       '--test',
       '--test-concurrency=1',
       'tests/integration.test.ts',
+      'tests/deployment.test.ts',
     ],
     { stdio: 'inherit', env: process.env },
   );

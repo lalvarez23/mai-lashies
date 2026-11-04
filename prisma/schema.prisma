@@ -7,6 +7,14 @@ datasource db {
   provider = "postgresql"
 }
 
+model LoginThrottle {
+  key     String   @id
+  count   Int      @default(0)
+  resetAt DateTime
+
+  @@index([resetAt])
+}
+
 enum Role {
   SUPERADMIN
   BASIC
