@@ -18,7 +18,7 @@ Importar `lalvarez23/mai-lashies` desde GitHub y usar la raíz del repositorio.
 | --- | --- |
 | Framework | Vite |
 | Node.js | 24.x |
-| Install Command | npm ci |
+| Install Command | npm ci --include=dev |
 | Build Command | npm run build:vercel |
 | Output Directory | dist |
 
