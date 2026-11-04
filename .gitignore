@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+.local/
+data/
+backups/
+server/generated/
+*.log
+# Capturas locales que pueden incluir cifras y datos privados del negocio.
+docs/capturas/

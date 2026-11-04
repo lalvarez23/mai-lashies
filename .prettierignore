@@ -1,0 +1,6 @@
+node_modules
+server/generated
+dist
+.local
+.env
+backups

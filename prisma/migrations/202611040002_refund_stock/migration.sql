@@ -1,0 +1,1 @@
+ALTER TABLE "Sale" ADD COLUMN "restocked" BOOLEAN NOT NULL DEFAULT true;

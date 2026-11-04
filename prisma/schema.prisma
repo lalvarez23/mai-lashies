@@ -1,0 +1,169 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../server/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  SUPERADMIN
+  BASIC
+}
+
+enum SaleStatus {
+  PAID
+  CANCELLED
+}
+
+enum DeliveryStatus {
+  PENDING
+  PREPARING
+  ON_ROUTE
+  DELIVERED
+}
+
+model User {
+  id           String          @id @default(uuid())
+  name         String
+  email        String          @unique
+  passwordHash String
+  role         Role            @default(BASIC)
+  active       Boolean         @default(true)
+  createdAt    DateTime        @default(now())
+  sessions     Session[]
+  sales        Sale[]
+  movements    StockMovement[]
+  expenses     Expense[]
+  audits       Audit[]
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  csrf      String
+  expiresAt DateTime
+
+  @@index([expiresAt])
+}
+
+model Product {
+  id          String          @id @default(uuid())
+  sku         String          @unique
+  name        String
+  category    String
+  brand       String          @default("")
+  description String          @default("")
+  variant     String          @default("")
+  supplier    String          @default("")
+  cost        Decimal         @db.Decimal(18, 4)
+  price       Decimal         @db.Decimal(18, 2)
+  stock       Int             @default(0)
+  minStock    Int             @default(3)
+  active      Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  movements   StockMovement[]
+  items       SaleItem[]
+}
+
+model StockMovement {
+  id            String   @id @default(uuid())
+  productId     String
+  product       Product  @relation(fields: [productId], references: [id])
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  quantity      Int
+  kind          String
+  reason        String
+  unitCost      Decimal? @db.Decimal(18, 4)
+  paymentMethod String?
+  cashAmount    Decimal  @default(0) @db.Decimal(18, 2)
+  saleId        String?
+  createdAt     DateTime @default(now())
+
+  @@index([productId, createdAt])
+}
+
+model Sale {
+  id             String         @id @default(uuid())
+  number         Int            @unique @default(autoincrement())
+  requestId      String         @unique
+  requestHash    String
+  userId         String
+  user           User           @relation(fields: [userId], references: [id])
+  customer       String         @default("")
+  phone          String         @default("")
+  address        String         @default("")
+  notes          String         @default("")
+  delivery       Boolean        @default(false)
+  deliveryStatus DeliveryStatus @default(PENDING)
+  shippingFee    Decimal        @default(0) @db.Decimal(18, 2)
+  shippingCost   Decimal        @default(0) @db.Decimal(18, 2)
+  subtotal       Decimal        @db.Decimal(18, 2)
+  discount       Decimal        @default(0) @db.Decimal(18, 2)
+  total          Decimal        @db.Decimal(18, 2)
+  costTotal      Decimal        @db.Decimal(18, 4)
+  status         SaleStatus     @default(PAID)
+  createdAt      DateTime       @default(now())
+  cancelledAt    DateTime?
+  cancelReason   String?
+  restocked      Boolean        @default(true)
+  items          SaleItem[]
+  payments       Payment[]
+
+  @@index([createdAt, status])
+}
+
+model SaleItem {
+  id        String  @id @default(uuid())
+  saleId    String
+  sale      Sale    @relation(fields: [saleId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  name      String
+  sku       String
+  quantity  Int
+  unitPrice Decimal @db.Decimal(18, 2)
+  unitCost  Decimal @db.Decimal(18, 4)
+}
+
+model Payment {
+  id        String   @id @default(uuid())
+  saleId    String
+  sale      Sale     @relation(fields: [saleId], references: [id])
+  method    String
+  amount    Decimal  @db.Decimal(18, 2)
+  createdAt DateTime @default(now())
+}
+
+model Expense {
+  id          String    @id @default(uuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  description String
+  category    String
+  amount      Decimal   @db.Decimal(18, 2)
+  method      String
+  occurredAt  DateTime
+  createdAt   DateTime  @default(now())
+  voidedAt    DateTime?
+  voidReason  String?
+
+  @@index([occurredAt])
+}
+
+model Audit {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  action    String
+  entity    String
+  entityId  String
+  detail    String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}

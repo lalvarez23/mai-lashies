@@ -1,0 +1,511 @@
+/* Mai Lashies: rosa chicle, fucsia y reflejos perlados del logo original. */
+.brand-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.sidebar {
+  background: linear-gradient(180deg, #fff 10%, #fffafd 100%);
+}
+.sidebar .brand {
+  gap: 10px;
+  padding: 0 5px;
+}
+.sidebar .brand-logo {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  border: 1px solid #f2bfd5;
+  box-shadow: 0 3px 10px #b43c7310;
+}
+.sidebar .brand strong {
+  font-size: 23px;
+  color: #722746;
+}
+.sidebar .brand small {
+  color: #97456c;
+  font-size: 8px;
+  letter-spacing: 0.4px;
+}
+.nav-item.active {
+  background: linear-gradient(100deg, #ffe2ef, #fff1f8);
+  box-shadow: inset 3px 0 #c94785;
+}
+.nav-dot,
+.tiny-dot {
+  background: #cc4d89;
+}
+.nav-item:hover,
+.icon-button:hover:not(:disabled) {
+  background: #fff0f7;
+}
+.button.primary {
+  background: linear-gradient(120deg, #b63470, #9e2c62);
+  box-shadow:
+    0 4px 10px #b634701a,
+    inset 0 1px 0 #ffffff26;
+}
+.button.primary:hover:not(:disabled) {
+  background: linear-gradient(120deg, #a62b63, #85234f);
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #c14c85;
+  box-shadow: 0 0 0 3px #ed7ab327;
+}
+.avatar,
+.product-avatar {
+  background: #ffe8f2;
+  border-color: #f4cede;
+  color: #a23d6b;
+}
+.little-note {
+  background: linear-gradient(120deg, #fff0f6, #ffe5f0);
+  color: #b64a7e;
+  padding: 17px 11px;
+  gap: 8px;
+}
+.little-note p,
+.little-note strong {
+  color: #8f4668;
+  font-size: 10px;
+}
+.topbar {
+  background: #ffffffed;
+}
+.page-heading .eyebrow,
+.section-caption {
+  color: #984567;
+}
+.stat-top {
+  color: #785367;
+  font-size: 12px;
+}
+.stat-card > strong {
+  color: #4b2c3e;
+}
+.stat-card > small {
+  color: #806576;
+  font-size: 10px;
+}
+.stat-icon.rose {
+  background: #ffe3f0;
+  color: #b83b76;
+}
+.stat-icon.lilac {
+  background: #f7e9f8;
+  color: #95629a;
+}
+.panel-heading p,
+.chart-summary > span,
+.panel-note,
+.mini-row small {
+  color: #876777;
+}
+.chart-empty {
+  color: #98617e;
+}
+.quick-panel {
+  background: linear-gradient(140deg, #fff8fc, #ffe7f2);
+}
+.quick-panel h2 {
+  color: #84375b;
+}
+.quick-panel > p,
+.quick-action small {
+  color: #865b71;
+}
+.quick-action > span {
+  background: #ffdaeb;
+  color: #b14376;
+  border: 1px solid #f8c9de;
+}
+.quick-action > svg {
+  color: #b14376;
+}
+.empty-icon {
+  background: #fff0f7;
+  color: #b97595;
+}
+.empty p {
+  color: #896e7c;
+}
+.page-footer {
+  color: #8e7081;
+}
+.page-footer > span:first-child {
+  color: #8d526e;
+}
+
+/* El original completo es protagonista, sin recortes ni recoloración. */
+.login-story {
+  background:
+    radial-gradient(ellipse at 8% 0%, #fff4fb9c 0%, transparent 46%),
+    radial-gradient(ellipse at 100% 90%, #f183b257 0%, transparent 50%), #f6bfd6;
+  color: #772d50;
+  padding: 36px 44px 30px;
+  gap: 24px;
+  border-right: 1px solid #edb5d0;
+}
+.login-story::after {
+  right: -180px;
+  bottom: -430px;
+  border-color: #fff8fc85;
+  box-shadow:
+    0 0 0 65px #ffffff0e,
+    0 0 0 130px #ffffff0b;
+}
+.login-brand-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #843658;
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 1.5px;
+}
+.brand-heart {
+  margin-left: auto;
+  font-size: 29px;
+  font-weight: 400;
+  line-height: 1;
+  color: #ab4b78;
+}
+.login-brand-feature {
+  width: 100%;
+  max-width: 470px;
+  margin: auto;
+  text-align: center;
+}
+.login-artwork {
+  max-width: 410px;
+  margin: 0 auto;
+  padding: 8px;
+  border-radius: 32px;
+  border: 1px solid #fff7fbb3;
+  background: linear-gradient(145deg, #ffeff8bf, #ffffff24 50%, #f08ab636);
+  box-shadow:
+    0 22px 60px #a3376b20,
+    inset 0 1px 0 #fff9fc;
+}
+.login-artwork .brand-logo {
+  border-radius: 24px;
+}
+.login-story .login-brand-feature h1 {
+  font:
+    italic 32px/1.3 Georgia,
+    serif;
+  letter-spacing: -0.7px;
+  color: #7c2e51;
+  margin: 27px 0 10px;
+}
+.login-brand-feature h1 span {
+  font-style: normal;
+  color: #ac4778;
+}
+.login-story .login-brand-feature p {
+  color: #8c4164;
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 0;
+}
+.story-foot {
+  justify-content: center;
+  color: #914969;
+  margin: 0;
+  font-size: 10px;
+}
+.login-form {
+  background: radial-gradient(ellipse at 100% 0%, #ffe4f14d 0%, transparent 50%), #fffafd;
+}
+.login-card .eyebrow {
+  font-size: 9px;
+  color: #9e3c6a;
+}
+.login-card h2 {
+  color: #632f49;
+}
+.login-card > p,
+.login-help {
+  color: #806273;
+}
+.login-card .field > span {
+  color: #74465f;
+}
+.login-card .button {
+  height: 46px;
+}
+.local-note {
+  color: #8e6e81;
+}
+
+/* La bienvenida acompaña los números sin quitarles protagonismo. */
+.dashboard-brand {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  gap: 26px;
+  padding: 16px 30px 16px 16px;
+  margin-bottom: 26px;
+  border: 1px solid #f2c4dc;
+  border-radius: 17px;
+  background:
+    radial-gradient(ellipse at 90% 0%, #fff9fca1, transparent 55%),
+    linear-gradient(100deg, #f9c5dc 0%, #ffe5f1 60%, #fbd2e5 100%);
+  box-shadow:
+    inset 0 1px 0 #fff9fc,
+    0 6px 22px #aa386b06;
+}
+.dashboard-brand > .brand-logo {
+  width: 132px;
+  height: 132px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  border: 4px solid #fff5f9b3;
+  box-shadow: 0 4px 18px #ad397517;
+}
+.dashboard-brand-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 580px;
+  padding-right: 35px;
+}
+.dashboard-brand-copy .eyebrow {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 1.4px;
+  color: #9b456d;
+  margin-bottom: 10px;
+}
+.dashboard-brand-copy h2 {
+  font:
+    italic 30px/1.2 Georgia,
+    serif;
+  letter-spacing: -0.6px;
+  color: #832b55;
+  margin: 0 0 10px;
+}
+.dashboard-brand-copy p {
+  margin: 0;
+  color: #854663;
+  font-size: 11px;
+  line-height: 1.7;
+}
+.brand-signature {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #9c5175;
+  font-size: 10px;
+  margin-top: 10px;
+}
+.brand-signature > span {
+  font-size: 18px;
+  line-height: 1;
+}
+.dashboard-sparkle {
+  position: absolute;
+  color: #fff8fc;
+  text-shadow: 0 1px 0 #c97a9c;
+  pointer-events: none;
+  line-height: 1;
+}
+.sparkle-one {
+  right: 28px;
+  top: 17px;
+  font-size: 59px;
+  transform: rotate(12deg);
+}
+.sparkle-two {
+  right: 80px;
+  bottom: 21px;
+  font-size: 23px;
+}
+.receipt-brand > .brand-logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 14px;
+  margin: 0 auto 12px;
+}
+.receipt-slogan {
+  display: block;
+  font:
+    italic 14px Georgia,
+    serif;
+  color: #9b456d;
+  margin: 0 0 12px;
+}
+
+@media (max-width: 1150px) {
+  .sidebar .brand {
+    gap: 7px;
+    padding: 0;
+  }
+  .sidebar .brand-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 13px;
+  }
+  .sidebar .brand strong {
+    font-size: 21px;
+  }
+  .sidebar .brand small {
+    font-size: 7px;
+    letter-spacing: 0.15px;
+  }
+  .login-story {
+    padding: 33px 29px 29px;
+  }
+  .login-story .login-brand-feature h1 {
+    font-size: 29px;
+  }
+  .dashboard-brand {
+    gap: 20px;
+  }
+  .dashboard-brand-copy h2 {
+    font-size: 27px;
+  }
+  .stat-top {
+    font-size: 10.5px;
+  }
+  .stat-card > small {
+    font-size: 9px;
+  }
+}
+@media (max-width: 900px) {
+  .sidebar .brand strong {
+    font-size: 19px;
+  }
+  .dashboard-brand > .brand-logo {
+    width: 112px;
+    height: 112px;
+  }
+  .dashboard-brand-copy {
+    padding-right: 0;
+  }
+  .dashboard-brand-copy h2 {
+    font-size: 25px;
+  }
+  .sparkle-one {
+    right: 14px;
+    font-size: 37px;
+    opacity: 0.7;
+  }
+  .sparkle-two {
+    display: none;
+  }
+  .login-brand-heading {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+}
+@media (max-width: 700px) {
+  .sidebar .brand-logo {
+    width: 58px;
+    height: 58px;
+  }
+  .sidebar .brand strong {
+    font-size: 23px;
+  }
+  .sidebar .brand small {
+    font-size: 8px;
+  }
+  .login-story {
+    padding: 22px 24px 28px;
+    min-height: auto;
+    gap: 22px;
+    border-right: 0;
+    border-bottom: 1px solid #f0c0d7;
+  }
+  .login-brand-feature {
+    max-width: 350px;
+  }
+  .login-artwork {
+    width: min(72vw, 260px);
+    padding: 6px;
+    border-radius: 25px;
+  }
+  .login-artwork .brand-logo {
+    border-radius: 19px;
+  }
+  .login-story .login-brand-feature h1 {
+    font-size: 25px;
+    margin: 19px 0 0;
+  }
+  .login-story .login-brand-feature p {
+    display: none;
+  }
+  .login-card h2 {
+    font-size: 32px;
+  }
+  .login-form {
+    padding-top: 32px;
+  }
+  .dashboard-brand {
+    gap: 15px;
+    padding: 13px;
+    margin-bottom: 22px;
+    border-radius: 14px;
+  }
+  .dashboard-brand > .brand-logo {
+    width: 94px;
+    height: 94px;
+    border-width: 3px;
+    border-radius: 15px;
+  }
+  .dashboard-brand-copy .eyebrow {
+    font-size: 6.5px;
+    letter-spacing: 0.75px;
+    margin-bottom: 7px;
+  }
+  .dashboard-brand-copy h2 {
+    font-size: 23px;
+    margin-bottom: 7px;
+  }
+  .dashboard-brand-copy p {
+    font-size: 10px;
+  }
+  .brand-signature {
+    font-size: 8.5px;
+    margin-top: 7px;
+  }
+  .dashboard-sparkle {
+    display: none;
+  }
+  .stat-top {
+    font-size: 10px;
+  }
+  .stat-card > small {
+    font-size: 9px;
+  }
+}
+@media (max-width: 380px) {
+  .dashboard-brand > .brand-logo {
+    width: 78px;
+    height: 78px;
+  }
+  .dashboard-brand {
+    gap: 10px;
+  }
+  .dashboard-brand-copy h2 {
+    font-size: 20px;
+  }
+  .brand-signature {
+    display: none;
+  }
+  .stat-top {
+    font-size: 9px;
+  }
+}
+@media print {
+  .receipt-brand > .brand-logo {
+    width: 26mm;
+    height: 26mm;
+  }
+}
